@@ -80,6 +80,9 @@ COPY overrides/background2.jpg /data/upload/scp/images/login-headquarters.jpg
 COPY overrides/L_SilphRoad_transparent.png /data/upload/scp/images/ost-logo.png
 COPY overrides/login.css /data/upload/scp/css/login.css
 
+# Copy Plugins
+COPY overrides/plugins /data/upload/include/plugins
+
 VOLUME ["/data/upload/include/plugins","/data/upload/include/i18n","/var/log/nginx"]
 EXPOSE 80
 CMD ["/data/bin/start.sh"]
