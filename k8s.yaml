@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: silph-help
+  name: silph-help
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: silph-help
+  strategy: {}
+  minReadySeconds: 10
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: silph-help
+    spec:
+      imagePullSecrets:
+      - name: hub
+      containers:
+      - image: silph/ticket:1.10.1
+        env:
+        - name: CRON_INTERVAL
+          value: "1"
+        - name: MYSQL_PREFIX
+          value: "support_"
+        - name: INSTALL_SECRET
+          value: Agh0ietheiyahteiPh1ahj
+        - name: MYSQL_DATABASE
+          value: silph-ticket
+        - name: MYSQL_USER
+          value: silph-camp
+        - name: MYSQL_HOST
+          value: "10.142.0.4"
+        - name: MYSQL_PORT
+          value: "3306"
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: silph-camps
+              key: dbpass
+        imagePullPolicy: Always
+        name: silph-help
+        ports:
+        - containerPort: 80
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: silph-help
+  labels:
+    app: silph-help
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: silph-help
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: silph-help
+ annotations:
+   kubernetes.io/tls-acme: "true"
+spec:
+ tls:
+   - hosts:
+      - help.silph.io
+     secretName: help-tls
+ rules:
+   - host: help.silph.io
+     http:
+       paths:
+         - path: /
+           backend:
+             serviceName: silph-help
+             servicePort: 80
