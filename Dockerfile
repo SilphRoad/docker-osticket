@@ -1,4 +1,4 @@
-FROM silph/php:7.0-fpm-xenial
+FROM silph/php:7.2-fpm-xenial
 MAINTAINER Martin Campbell <martin@campbellsoftware.co.uk>
 
 # setup workdir
@@ -6,11 +6,11 @@ RUN mkdir /data
 WORKDIR /data
 
 # environment for osticket
-ENV OSTICKET_VERSION 1.10.1
+ENV OSTICKET_VERSION 1.12.3
 ENV HOME /data
 
 # requirements and PHP extensions
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y \
     cron \
     wget \
     unzip \
@@ -46,7 +46,7 @@ RUN apt-get update && apt-get install -y \
     rm -rf /var/lib/apt/lists/*
 
 # Download & install OSTicket
-RUN wget -nv -O osTicket.zip http://osticket.com/sites/default/files/download/osTicket-v${OSTICKET_VERSION}.zip && \
+RUN wget -nv -O osTicket.zip https://github.com/osTicket/osTicket/releases/download/v${OSTICKET_VERSION}/osTicket-v${OSTICKET_VERSION}.zip && \
     unzip osTicket.zip && \
     rm osTicket.zip && \
     chown -R www-data:www-data /data/upload/ && \
@@ -57,13 +57,13 @@ RUN wget -nv -O osTicket.zip http://osticket.com/sites/default/files/download/os
     chmod 700 /data/upload/setup_hidden
 
 # Download languages packs
-RUN wget -nv -O upload/include/i18n/fr.phar http://osticket.com/sites/default/files/download/lang/fr.phar && \
-    wget -nv -O upload/include/i18n/ar.phar http://osticket.com/sites/default/files/download/lang/ar.phar && \
-    wget -nv -O upload/include/i18n/pt_BR.phar http://osticket.com/sites/default/files/download/lang/pt_BR.phar && \
-    wget -nv -O upload/include/i18n/it.phar http://osticket.com/sites/default/files/download/lang/it.phar && \
-    wget -nv -O upload/include/i18n/es_ES.phar http://osticket.com/sites/default/files/download/lang/es_ES.phar && \
-    wget -nv -O upload/include/i18n/de.phar http://osticket.com/sites/default/files/download/lang/de.phar && \
-    mv upload/include/i18n upload/include/i18n.dist
+#RUN wget -nv -O upload/include/i18n/fr.phar http://osticket.com/sites/default/files/download/lang/fr.phar && \
+#    wget -nv -O upload/include/i18n/ar.phar http://osticket.com/sites/default/files/download/lang/ar.phar && \
+#    wget -nv -O upload/include/i18n/pt_BR.phar http://osticket.com/sites/default/files/download/lang/pt_BR.phar && \
+#    wget -nv -O upload/include/i18n/it.phar http://osticket.com/sites/default/files/download/lang/it.phar && \
+#    wget -nv -O upload/include/i18n/es_ES.phar http://osticket.com/sites/default/files/download/lang/es_ES.phar && \
+#    wget -nv -O upload/include/i18n/de.phar http://osticket.com/sites/default/files/download/lang/de.phar && \
+#    mv upload/include/i18n upload/include/i18n.dist
 
 # Configure nginx, PHP, msmtp and supervisor
 COPY nginx.conf /etc/nginx/nginx.conf
