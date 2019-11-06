@@ -1,7 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: silph-help
   name: silph-help
@@ -14,14 +13,13 @@ spec:
   minReadySeconds: 10
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: silph-help
     spec:
       imagePullSecrets:
       - name: hub
       containers:
-      - image: silph/ticket:1.10.1
+      - image: silph/ticket:1.11.0
         env:
         - name: CRON_INTERVAL
           value: "1"

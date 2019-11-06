@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: silph-help
+ annotations:
+   kubernetes.io/tls-acme: "true"
+spec:
+ tls:
+   - hosts:
+      - help.silph.io
+     secretName: help-tls
+ rules:
+   - host: help.silph.io
+     http:
+       paths:
+         - path: /
+           backend:
+             serviceName: silph-help
+             servicePort: 80
