@@ -127,7 +127,7 @@ define('TABLE_PREFIX','support_');
 # http://en.wikipedia.org/wiki/X-Forwarded-For
 #
 
-define('TRUSTED_PROXIES', '*');
+define('TRUSTED_PROXIES', '');
 
 
 # Option: LOCAL_NETWORKS (default: 127.0.0.0/24)
