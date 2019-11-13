@@ -74,7 +74,6 @@ COPY supervisord.conf /data/supervisord.conf
 COPY msmtp.conf /data/msmtp.conf
 COPY php.ini $PHP_INI_DIR/php.ini
 
-COPY ost-config.php /data/upload/include/ost-config.php
 
 
 COPY bin/ /data/bin
@@ -82,6 +81,8 @@ COPY bin/ /data/bin
 COPY overrides/background2.jpg /data/upload/scp/images/login-headquarters.jpg
 COPY overrides/L_SilphRoad_transparent.png /data/upload/scp/images/ost-logo.png
 COPY overrides/login.css /data/upload/scp/css/login.css
+
+COPY ost-config.php /data/upload/include/ost-config.php
 
 # Copy Plugins
 COPY overrides/plugins /data/upload/include/plugins
