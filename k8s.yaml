@@ -19,7 +19,7 @@ spec:
       imagePullSecrets:
       - name: hub
       containers:
-      - image: silph/ticket:1.11.0
+      - image: silph/ticket:1.12.3-02
         env:
         - name: CRON_INTERVAL
           value: "1"
@@ -40,6 +40,8 @@ spec:
             secretKeyRef:
               name: silph-camps
               key: dbpass
+        - name: INSTALL_CONFIG
+          value: "/data/upload/include/ost-config.php"
         imagePullPolicy: Always
         name: silph-help
         ports:

@@ -84,6 +84,8 @@ COPY overrides/login.css /data/upload/scp/css/login.css
 
 COPY ost-config.php /data/upload/include/ost-config.php
 
+COPY phpinfo.php /data/upload/phpinfo.php
+
 # Copy Plugins
 COPY overrides/plugins /data/upload/include/plugins
 
