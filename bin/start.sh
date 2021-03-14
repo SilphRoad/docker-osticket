@@ -8,6 +8,14 @@ if [ ! "$(ls -A /data/upload/include/i18n)" ]; then
     chown -R www-data:www-data /data/upload/include/i18n
 fi
 
+
+if [ ! -f /data/upload/include/plugins/auth-ldap.phar ]; then
+  #do the install
+  wget -nv -O /data/upload/include/plugins/audit.phar https://s3.amazonaws.com/downloads.osticket.com/plugin/audit.phar
+  #set proper permmissions on those files
+  chown -R www-data:www-data /data/upload/include/plugins/audit.phar
+fi
+
 # Automate installation
 php /data/bin/install.php
 echo Applying configuration file security
