@@ -6,7 +6,7 @@ RUN mkdir /data
 WORKDIR /data
 
 # environment for osticket
-ENV OSTICKET_VERSION 1.12.3
+ENV OSTICKET_VERSION 1.15.1
 ENV HOME /data
 
 # requirements and PHP extensions
@@ -88,6 +88,9 @@ COPY phpinfo.php /data/upload/phpinfo.php
 
 # Copy Plugins
 COPY overrides/plugins /data/upload/include/plugins
+
+# Copy Overriden Templates
+COPY overrides/i18n /data/upload/include/i18n
 
 VOLUME ["/data/upload/include/plugins","/data/upload/include/i18n","/var/log/nginx"]
 EXPOSE 80

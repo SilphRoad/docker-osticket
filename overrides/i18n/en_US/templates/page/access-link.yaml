@@ -1,0 +1,22 @@
+#
+# access-link.yaml
+#
+# Ticket access link sent to clients for guest-only systems where the ticket
+# number and email address will trigger an access link sent via email
+#
+---
+notes: >
+    This template defines the notification for Clients that an access link was
+    sent to their email. The ticket number and email address trigger the access
+    link.
+name: "Ticket Information"
+body: >
+    <h3><strong>Hi %{recipient.name.first},</strong></h3>
+    <div>
+    If you'd like more information on your ticket, please contact support:<br />
+    For General or League Issues: team@thesilphroad.com.<br />
+    For Arena Issues: team@silph.gg.<br />
+    <br />
+    --<br />
+    %{company.name}
+    </div>
