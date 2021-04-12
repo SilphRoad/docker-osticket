@@ -82,6 +82,8 @@ COPY overrides/background2.jpg /data/upload/scp/images/login-headquarters.jpg
 COPY overrides/L_SilphRoad_transparent.png /data/upload/scp/images/ost-logo.png
 COPY overrides/login.css /data/upload/scp/css/login.css
 
+COPY overrides/css/redactor.css /data/upload/css/redactor.css
+
 COPY ost-config.php /data/upload/include/ost-config.php
 
 COPY phpinfo.php /data/upload/phpinfo.php
